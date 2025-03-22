@@ -1,0 +1,49 @@
+#user folder
+eval $(minikube docker-env)
+
+# Navigate to backend folder
+cd backend
+
+docker build -t backend:latest .
+
+#Then verify the image exist:
+docker images | grep backend
+
+minikube image load backend:latest
+
+# Navigate to backend folder
+cd ../frontend
+
+# Build the frontend image
+docker build -t frontend:latest .
+
+#Then verify the image exist
+docker images | grep frontend
+
+# Load the image into Minikube
+minikube image load frontend:latest
+
+kubectl apply -f k8s/backend-deployment.yaml
+kubectl apply -f k8s/frontend-deployment.yaml
+kubectl apply -f k8s/service.yaml
+kubectl apply -f k8s/configmap.yaml
+
+kubectl get pods
+kubectl get svc
+
+# to test frond end
+minikube service frontend-service --url
+kubectl get nodes -o wide
+
+# to test back end
+kubectl run test-pod --image=alpine --restart=Never -it -- sh
+apk add curl  # Install curl if not available
+curl http://backend-service:5000/products
+
+
+
+
+
+
+
+

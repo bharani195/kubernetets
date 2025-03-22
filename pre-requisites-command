@@ -1,0 +1,41 @@
+# Update package index
+sudo apt update
+
+# Install Docker
+sudo apt install docker.io -y
+
+# Start and enable Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# Verify installation
+docker --version
+
+
+# Download Minikube binary
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+# Install Minikube
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+# Verify installation
+minikube version
+
+# Download Kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+# Make it executable
+chmod +x kubectl
+
+# Move to a system path
+sudo mv kubectl /usr/local/bin/
+
+# Verify installation
+kubectl version --client
+
+2. Start Minikube
+# Start Minikube
+minikube start
+
+# Verify Minikube is running
+kubectl get nodes

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <script>
+        async function fetchProducts() {
+            const response = await fetch("http://backend-service:5000/products");
+            const products = await response.json();
+            let output = "<h2>Product List</h2><ul>";
+            products.forEach(product => {
+                output += `<li>${product.name} - $${product.price}</li>`;
+            });
+            output += "</ul>";
+            document.getElementById("product-list").innerHTML = output;
+        }
+    </script>
+</head>
+<body onload="fetchProducts()">
+    <h1>Welcome to Our Store</h1>
+    <div id="product-list">Loading...</div>
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+#Stop All Kubernetes Pods and Deployments
+
+kubectl delete all --all --force --grace-period=0
+kubectl delete namespace kube-system --force --grace-period=0
+
+#Stop and Delete Minikube
+
+minikube stop
+minikube delete --all --purge
+
+#Stop and Remove Docker Containers
+#Force-stop all running containers:
+
+docker kill $(docker ps -q)
+docker rm -f $(docker ps -aq)
+
+#Stop Docker and Restart
+
+systemctl stop docker
+systemctl start docker
+
+#Kill All Kubernetes, Minikube, and Docker Processes
+
+pkill -f docker
+pkill -f minikube
+pkill -f kubectl
+pkill -f containerd
+
+#Cleanup Docker System
+docker system prune -a --volumes -f
+
+#commands to stop all ip's utilising 8080
+sudo netstat -tulnp | grep ":8080"
+sudo kill -9 <PID>
