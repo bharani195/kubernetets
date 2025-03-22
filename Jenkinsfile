@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'mugil', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
-                    git url: "https://$GIT_USER:$GIT_TOKEN@github.com/PadmavathyNarayanan/jenkins-docker-demo.git", branch: 'main'
+                    git url: "https://$GIT_USER:$GIT_TOKEN@github.com/bharani195/kubernetes1.git", branch: 'main'
                 }
             }
         }
